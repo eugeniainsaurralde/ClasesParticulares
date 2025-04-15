@@ -15,7 +15,7 @@ CREATE TABLE `alumno` (
   `apellido` VARCHAR(45) NOT NULL,
   `edad` INT NOT NULL,
   `colegio` VARCHAR(45) NOT NULL,
-  `celular` INT DEFAULT NULL,
+  `celular` VARCHAR(20) DEFAULT NULL,
   `padre_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`padre_id`) REFERENCES `padres`(`Id`)
