@@ -33,7 +33,8 @@ INSERT INTO temas (tema, año, dificultad, materia_id) VALUES
 ('Logaritmos', 5, 'alta', 1),
 ('Estadística y probabilidad', 5, 'media', 1),
 ('Derivadas básicas', 6, 'alta', 1),
-('Cálculo de áreas bajo curvas', 6, 'alta', 1);
+('Cálculo de áreas bajo curvas', 6, 'alta', 1),
+('Integrales',6,'alta',1);
 
 INSERT INTO temas (tema, año, dificultad, materia_id) VALUES
 ('Magnitudes físicas y unidades', 1, 'baja', 2),
@@ -46,7 +47,8 @@ INSERT INTO temas (tema, año, dificultad, materia_id) VALUES
 ('Circuitos eléctricos', 5, 'alta', 2),
 ('Ondas y sonido', 5, 'media', 2),
 ('Electromagnetismo', 6, 'alta', 2),
-('Física moderna: relatividad, átomos', 6, 'alta', 2);
+('Física moderna: relatividad, átomos', 6, 'alta', 2),
+('Energia mecanica', 4, 'media', 2);
 
 INSERT INTO temas (tema, año, dificultad, materia_id) VALUES
 ('Estados de la materia', 1, 'baja', 3),
@@ -59,7 +61,8 @@ INSERT INTO temas (tema, año, dificultad, materia_id) VALUES
 ('Cálculos estequiométricos', 5, 'alta', 3),
 ('Equilibrio químico', 5, 'alta', 3),
 ('Ácidos y bases', 6, 'alta', 3),
-('Redox y electroquímica', 6, 'alta', 3);
+('Redox y electroquímica', 6, 'alta', 3),
+('Diluciones', 5, 'media', 3);
 
 INSERT INTO temas (tema, año, dificultad, materia_id) VALUES
 ('Present simple & vocabulary', 1, 'baja', 4),
