@@ -69,6 +69,7 @@ CREATE TABLE `clases` (
   `turno1_id` INT NOT NULL,
   `turno2_id` INT,
   `estado` ENUM('pendiente', 'realizada', 'cancelada') NOT NULL,
+  `cupo` VARCHAR(45),
   PRIMARY KEY (`id`),
   FOREIGN KEY (`horario_id`) REFERENCES `horarios`(`id`),
   FOREIGN KEY (`turno1_id`) REFERENCES `turnos`(`id`),
@@ -81,10 +82,21 @@ CREATE TABLE `notas` (
   `materia_id` INT NOT NULL,
   `tema_id` INT NOT NULL,
   `nota` DECIMAL(4,2),
+  `estado` VARCHAR(15) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`alumno_id`) REFERENCES `alumno`(`id`),
   FOREIGN KEY (`materia_id`) REFERENCES `materia`(`id`),
   FOREIGN KEY (`tema_id`) REFERENCES `temas`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `ganancias` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `mes` VARCHAR(45),
+  `valor_clase` INT NOT NULL,
+  `cantidad_clases` INT NOT NULL,
+  `cantidad_turnos` INT NOT NULL,
+  `ganancia_mensual` DECIMAL(10,2),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci; 
 
 
