@@ -64,4 +64,16 @@ UPDATE clases SET estado = 'realizada', turno2_id = NULL WHERE id = 185;
 select * from ganancias;
 INSERT INTO ganancias (valor_clase) VALUES (6500);
 
+-- TEST PARA INFORME
+
+/* ES necesario eliminar momentaneamente el trigger ya que si no al cargarle el valor de la clase calcula todo como si fuese el mes corriente (abril). 
+Una vez que se ejecuta correctamente el stored procedure se puede habilitar nuevamente el trigger*/
+DROP TRIGGER IF EXISTS realizar_contabilidad_mensual;
+TRUNCATE TABLE ganancias;
+
+SELECT * from clases order by fecha ;
+CALL calcular_ganancias_mensuales('2024-04','2025-05',6500);
+select * from ganancias;
+
+
 

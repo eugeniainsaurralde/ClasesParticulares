@@ -307,4 +307,58 @@ END;
 //
 
 
+-- INFORMES
+DELIMITER //
+
+CREATE PROCEDURE calcular_ganancias_mensuales(IN fecha_inicio VARCHAR(7), IN fecha_fin VARCHAR(7), IN valor_clase INT)
+BEGIN
+    DECLARE fecha_registrada DATE;
+	DECLARE fecha_final DATE;
+    DECLARE fecha_a_comparar VARCHAR(7);
+    DECLARE clases_mes INT;
+    DECLARE turnos_mes INT;
+    DECLARE ganancia_mensual DECIMAL(10,2);
+
+    -- Convertimos los textos que pasamos por parametro a fechas reales 
+    SET fecha_registrada = STR_TO_DATE(CONCAT(fecha_inicio, '-01'), '%Y-%m-%d');
+    SET fecha_final = STR_TO_DATE(CONCAT(fecha_fin, '-01'), '%Y-%m-%d');
+
+	-- Realizamos un bucle para que se siga ejecutando la consulta hasta llegar a la fceha final que se quiere calcular
+    WHILE fecha_registrada <= fecha_final DO
+    
+			-- Convertimos a string nuevamente para poder comparar en el formato deseado "año-mes"
+			SET fecha_a_comparar = DATE_FORMAT(fecha_registrada, '%Y-%m');
+            
+			-- Contar clases en el mes
+			SELECT IFNULL(COUNT(*), 0) INTO clases_mes
+            FROM clases
+            WHERE estado = 'realizada' AND DATE_FORMAT(fecha, '%Y-%m') =  fecha_a_comparar;
+            
+            -- Contar turnos del mes
+            SELECT IFNULL(SUM(CASE WHEN cupo = 'completo' THEN 2 ELSE 1 END), 0) INTO turnos_mes
+            FROM clases
+            WHERE estado = 'realizada' AND DATE_FORMAT(fecha, '%Y-%m') =  fecha_a_comparar;
+
+            -- Calcular ganancias
+            SET ganancia_mensual = valor_clase * turnos_mes;
+
+            -- Insertar valores
+            INSERT INTO ganancias (mes, valor_clase, cantidad_clases, cantidad_turnos, ganancia_mensual)
+            VALUES (DATE_FORMAT(fecha_registrada, '%Y-%m'), valor_clase, clases_mes, turnos_mes, ganancia_mensual);
+
+        -- Aumentamos un mes
+        SET fecha_registrada = DATE_ADD(fecha_registrada, INTERVAL 1 MONTH);
+    END WHILE;
+END //
+
+CREATE OR REPLACE VIEW contar_alumnos_por_edad AS
+SELECT 
+    edad,
+    COUNT(*) AS cantidad
+FROM alumno
+GROUP BY edad
+ORDER BY edad;
+
+
+
 
