@@ -65,6 +65,8 @@ END;
 //
 
 -- VISTAS
+DELIMITER ;
+
 CREATE OR REPLACE VIEW contacto_con_padres AS
 SELECT 
   a.apellido AS Apellido_alumno,
@@ -90,7 +92,7 @@ SELECT
 dificultad AS Dificultad, 
 tema AS Tema
 FROM temas
-ORDER BY dificulta;
+ORDER BY dificultad;
 
 CREATE OR REPLACE VIEW temas_segun_materia_y_anio AS
 SELECT 
